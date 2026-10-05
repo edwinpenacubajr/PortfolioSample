@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -34,41 +35,243 @@ body {
 
 
 /* =========================================================
-   BACKGROUND
+   ANIMATED BACKGROUND
 ========================================================= */
 
-body::before {
-    content: "";
+.animated-background {
     position: fixed;
     inset: 0;
-    pointer-events: none;
-    z-index: -2;
-
+    z-index: -10;
+    overflow: hidden;
     background:
         radial-gradient(
-            circle at 70% 40%,
-            rgba(30, 120, 200, 0.10),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 30% 80%,
-            rgba(0, 100, 180, 0.07),
-            transparent 35%
+            circle at 50% 50%,
+            #101820 0%,
+            #080808 55%,
+            #050505 100%
         );
 }
 
+
+/* Moving blue glow */
+
+.glow {
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(30, 130, 210, .20) 0%,
+            rgba(30, 130, 210, .08) 30%,
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    animation: floatingGlow 18s ease-in-out infinite;
+}
+
+
+/* Glow positions */
+
+.glow.one {
+    top: -300px;
+    left: -250px;
+    animation-delay: 0s;
+}
+
+.glow.two {
+    right: -300px;
+    top: 20%;
+    animation-delay: -6s;
+}
+
+.glow.three {
+    left: 25%;
+    bottom: -400px;
+    animation-delay: -12s;
+}
+
+
+/* Continuous movement */
+
+@keyframes floatingGlow {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translate3d(180px, 100px, 0)
+            scale(1.15);
+    }
+
+    50% {
+        transform:
+            translate3d(50px, 250px, 0)
+            scale(.9);
+    }
+
+    75% {
+        transform:
+            translate3d(-180px, 100px, 0)
+            scale(1.1);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   MOVING GRID
+========================================================= */
+
 .grid-background {
+
     position: fixed;
-    inset: 0;
-    z-index: -1;
+
+    inset: -100px;
+
+    z-index: -9;
+
     pointer-events: none;
-    opacity: .25;
+
+    opacity: .28;
 
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
 
     background-size: 70px 70px;
+
+    animation: gridMove 12s linear infinite;
+}
+
+
+@keyframes gridMove {
+
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(70px, 70px, 0);
+    }
+
+}
+
+
+/* =========================================================
+   MOVING LIGHT STREAKS
+========================================================= */
+
+.light-streaks {
+
+    position: fixed;
+
+    inset: -50%;
+
+    z-index: -8;
+
+    pointer-events: none;
+
+    opacity: .35;
+
+    background:
+        repeating-linear-gradient(
+            115deg,
+            transparent 0px,
+            transparent 90px,
+            rgba(60,150,220,.035) 91px,
+            rgba(60,150,220,.035) 93px,
+            transparent 94px,
+            transparent 180px
+        );
+
+    animation: streakMove 20s linear infinite;
+}
+
+
+@keyframes streakMove {
+
+    from {
+        transform:
+            translate3d(-100px, -100px, 0);
+    }
+
+    to {
+        transform:
+            translate3d(100px, 100px, 0);
+    }
+
+}
+
+
+/* =========================================================
+   PARTICLE-LIKE DOTS
+========================================================= */
+
+.particles {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -7;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(90,170,230,.18) 1px,
+            transparent 1.5px
+        );
+
+    background-size: 90px 90px;
+
+    animation: particlesMove 15s linear infinite;
+
+    opacity: .22;
+}
+
+
+@keyframes particlesMove {
+
+    0% {
+        background-position:
+            0 0;
+    }
+
+    50% {
+        background-position:
+            45px 45px;
+    }
+
+    100% {
+        background-position:
+            90px 90px;
+    }
+
 }
 
 
@@ -77,17 +280,20 @@ body::before {
 ========================================================= */
 
 .sidebar {
+
     position: fixed;
+
     left: 16px;
     top: 16px;
     bottom: 16px;
 
     width: 272px;
 
-    background: rgba(22,22,22,.94);
+    background: rgba(18,18,18,.88);
+
     border-radius: 25px;
 
-    border: 1px solid rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.07);
 
     padding: 20px;
 
@@ -97,9 +303,11 @@ body::before {
     z-index: 100;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.45);
+        0 20px 60px rgba(0,0,0,.55);
 
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
 }
 
 
@@ -112,22 +320,31 @@ body::before {
 }
 
 .time {
+
     font-size: 13px;
+
     font-weight: bold;
+
     color: #ddd;
 
     margin-bottom: 8px;
 }
 
 .location {
+
     color: #777;
+
     font-size: 11px;
 }
 
 .logo {
+
     margin-top: 12px;
+
     font-size: 18px;
+
     font-weight: 700;
+
     letter-spacing: .5px;
 }
 
@@ -141,6 +358,7 @@ body::before {
 ========================================================= */
 
 .avatar {
+
     width: 105px;
     height: 105px;
 
@@ -149,10 +367,12 @@ body::before {
     border-radius: 50%;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     font-size: 32px;
+
     font-weight: bold;
 
     color: white;
@@ -160,8 +380,8 @@ body::before {
     background:
         linear-gradient(
             145deg,
-            #2c2c2c,
-            #111
+            #303030,
+            #0d0d0d
         );
 
     border: 4px solid #171717;
@@ -169,15 +389,18 @@ body::before {
     box-shadow:
         0 0 0 1px rgba(255,255,255,.06),
         0 15px 35px rgba(0,0,0,.5);
+
+    position: relative;
 }
 
 .avatar::after {
+
     content: "✓";
 
     position: absolute;
 
-    margin-left: 75px;
-    margin-top: 72px;
+    right: -4px;
+    bottom: -2px;
 
     width: 23px;
     height: 23px;
@@ -185,6 +408,7 @@ body::before {
     border-radius: 50%;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -193,20 +417,31 @@ body::before {
     color: white;
 
     font-size: 13px;
+
     font-weight: bold;
 
     border: 3px solid #161616;
 }
 
+
 .profile-name {
+
     font-size: 17px;
+
     font-weight: bold;
+
+    text-align: center;
 }
 
 .profile-role {
+
     margin-top: 5px;
+
     color: #858585;
+
     font-size: 12px;
+
+    text-align: center;
 }
 
 
@@ -215,20 +450,25 @@ body::before {
 ========================================================= */
 
 .socials {
+
     display: flex;
+
     justify-content: center;
+
     gap: 8px;
 
     margin: 16px 0 20px;
 }
 
 .socials a {
+
     width: 42px;
     height: 38px;
 
     border-radius: 10px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -239,15 +479,20 @@ body::before {
     text-decoration: none;
 
     font-size: 12px;
+
     font-weight: bold;
 
     transition: .3s;
 }
 
 .socials a:hover {
+
     color: white;
+
     background: #1b1b1b;
-    border-color: #444;
+
+    border-color: #4da6ff;
+
     transform: translateY(-3px);
 }
 
@@ -257,23 +502,31 @@ body::before {
 ========================================================= */
 
 .menu-title {
+
     color: #777;
+
     font-size: 10px;
+
     letter-spacing: 2px;
+
     font-weight: bold;
 
     margin: 0 0 10px 5px;
 }
 
 .menu {
+
     border-top: 1px solid #303030;
+
     padding-top: 12px;
 }
 
 .menu a {
+
     position: relative;
 
     display: flex;
+
     align-items: center;
 
     gap: 14px;
@@ -287,6 +540,7 @@ body::before {
     border-radius: 8px;
 
     font-size: 14px;
+
     font-weight: 600;
 
     transition: .25s;
@@ -294,20 +548,28 @@ body::before {
 
 .menu a:hover,
 .menu a.active {
+
     color: #64b5ff;
-    background: rgba(60,150,230,.07);
+
+    background:
+        rgba(60,150,230,.08);
 }
 
 .menu-icon {
+
     width: 20px;
+
     text-align: center;
+
     font-size: 16px;
 }
 
 .badge {
+
     margin-left: auto;
 
     background: #123451;
+
     color: #5eb6ff;
 
     padding: 3px 7px;
@@ -319,7 +581,7 @@ body::before {
 
 
 /* =========================================================
-   MAIN CONTENT
+   MAIN
 ========================================================= */
 
 main {
@@ -332,10 +594,13 @@ main {
 ========================================================= */
 
 .hero {
+
     min-height: 100vh;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -343,62 +608,65 @@ main {
     position: relative;
 
     padding: 60px;
+
     overflow: hidden;
 }
 
 
-/* animated lines */
+/* Additional hero glow */
 
 .hero::before {
+
     content: "";
 
     position: absolute;
 
-    width: 110%;
-    height: 420px;
-
-    left: -5%;
-    top: 50%;
-
-    transform: translateY(-50%);
+    width: 900px;
+    height: 500px;
 
     background:
-        repeating-linear-gradient(
-            175deg,
-            transparent 0px,
-            transparent 30px,
-            rgba(40,130,200,.15) 31px,
-            transparent 32px
+        radial-gradient(
+            ellipse,
+            rgba(30,130,210,.10),
+            transparent 70%
         );
 
-    opacity: .8;
+    filter: blur(25px);
 
-    animation: moveLines 8s linear infinite;
+    animation:
+        heroGlow 10s ease-in-out infinite;
+
+    pointer-events: none;
 }
 
-@keyframes moveLines {
+
+@keyframes heroGlow {
 
     0% {
         transform:
-            translateY(-50%)
-            translateX(-40px);
+            translateX(-200px)
+            scale(.9);
     }
 
     50% {
         transform:
-            translateY(-50%)
-            translateX(40px);
+            translateX(200px)
+            scale(1.2);
     }
 
     100% {
         transform:
-            translateY(-50%)
-            translateX(-40px);
+            translateX(-200px)
+            scale(.9);
     }
+
 }
 
+
 .hero-content {
+
     position: relative;
+
     z-index: 2;
 
     max-width: 1050px;
@@ -410,7 +678,9 @@ main {
 ========================================================= */
 
 .hero-small {
+
     font-size: 13px;
+
     letter-spacing: 5px;
 
     color: #777;
@@ -419,7 +689,9 @@ main {
 }
 
 .hero h1 {
-    font-size: clamp(65px, 9vw, 145px);
+
+    font-size:
+        clamp(65px, 9vw, 145px);
 
     line-height: .84;
 
@@ -429,6 +701,7 @@ main {
 }
 
 .hero h1 strong {
+
     display: block;
 
     font-weight: 900;
@@ -437,6 +710,7 @@ main {
 }
 
 .hero-description {
+
     max-width: 650px;
 
     margin: 40px auto;
@@ -458,9 +732,11 @@ main {
 ========================================================= */
 
 .btn {
+
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 15px;
@@ -473,7 +749,8 @@ main {
 
     border: 1px solid #333;
 
-    background: rgba(10,10,10,.7);
+    background:
+        rgba(10,10,10,.72);
 
     text-decoration: none;
 
@@ -484,15 +761,22 @@ main {
     letter-spacing: 3px;
 
     transition: .3s;
+
+    cursor: pointer;
 }
 
 .btn:hover {
+
     background: white;
+
     color: black;
 
     border-color: white;
 
     transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 35px rgba(255,255,255,.08);
 }
 
 
@@ -501,14 +785,19 @@ main {
 ========================================================= */
 
 section {
+
     min-height: 100vh;
 
     padding: 110px 8%;
 
-    border-top: 1px solid #171717;
+    border-top:
+        1px solid rgba(255,255,255,.05);
+
+    position: relative;
 }
 
 .section-label {
+
     color: #4faeff;
 
     font-size: 11px;
@@ -519,7 +808,9 @@ section {
 }
 
 .section-title {
-    font-size: clamp(40px, 6vw, 75px);
+
+    font-size:
+        clamp(40px, 6vw, 75px);
 
     line-height: .95;
 
@@ -529,6 +820,7 @@ section {
 }
 
 .section-description {
+
     max-width: 650px;
 
     color: #888;
@@ -544,6 +836,7 @@ section {
 ========================================================= */
 
 .work-grid {
+
     margin-top: 60px;
 
     display: grid;
@@ -555,11 +848,13 @@ section {
 }
 
 .work-card {
+
     min-height: 260px;
 
     padding: 30px;
 
-    background: #111;
+    background:
+        rgba(17,17,17,.72);
 
     border: 1px solid #242424;
 
@@ -568,9 +863,14 @@ section {
     overflow: hidden;
 
     transition: .4s;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .work-card::before {
+
     content: "";
 
     position: absolute;
@@ -583,31 +883,46 @@ section {
 
     background: #167ac1;
 
-    opacity: .05;
+    opacity: .07;
 
     border-radius: 50%;
+
+    transition: .5s;
 }
 
 .work-card:hover {
+
     transform: translateY(-8px);
 
     border-color: #3a3a3a;
 }
 
+.work-card:hover::before {
+
+    transform:
+        scale(1.5);
+
+    opacity: .12;
+}
+
 .work-number {
+
     font-size: 12px;
+
     color: #555;
 
     margin-bottom: 40px;
 }
 
 .work-card h3 {
+
     font-size: 25px;
 
     margin-bottom: 12px;
 }
 
 .work-card p {
+
     color: #777;
 
     font-size: 14px;
@@ -621,6 +936,7 @@ section {
 ========================================================= */
 
 .services-grid {
+
     margin-top: 60px;
 
     display: grid;
@@ -632,35 +948,48 @@ section {
 }
 
 .service {
+
     padding: 30px;
 
-    background: #101010;
+    background:
+        rgba(16,16,16,.72);
 
     border: 1px solid #222;
 
     min-height: 220px;
 
     transition: .3s;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .service:hover {
+
     border-color: #3b3b3b;
+
     transform: translateY(-5px);
 }
 
 .service-icon {
+
     font-size: 28px;
 
     margin-bottom: 30px;
+
+    color: #5bb5ff;
 }
 
 .service h3 {
+
     margin-bottom: 12px;
 
     font-size: 18px;
 }
 
 .service p {
+
     color: #777;
 
     font-size: 13px;
@@ -674,6 +1003,7 @@ section {
 ========================================================= */
 
 .about-grid {
+
     margin-top: 60px;
 
     display: grid;
@@ -685,6 +1015,7 @@ section {
 }
 
 .about-text {
+
     color: #999;
 
     line-height: 1.9;
@@ -693,31 +1024,51 @@ section {
 }
 
 .about-text p {
+
     margin-bottom: 20px;
 }
 
 .skills {
+
     display: grid;
 
     gap: 12px;
 }
 
 .skill {
+
     padding: 17px;
 
     border: 1px solid #242424;
 
-    background: #111;
+    background:
+        rgba(17,17,17,.72);
 
     color: #bbb;
 
     font-size: 13px;
 
     display: flex;
+
     justify-content: space-between;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: .3s;
+}
+
+.skill:hover {
+
+    transform:
+        translateX(5px);
+
+    border-color: #3b3b3b;
 }
 
 .skill span {
+
     color: #4da6ff;
 }
 
@@ -727,6 +1078,7 @@ section {
 ========================================================= */
 
 .contact {
+
     min-height: 70vh;
 
     display: flex;
@@ -739,11 +1091,14 @@ section {
 }
 
 .contact-content {
+
     max-width: 800px;
 }
 
 .contact h2 {
-    font-size: clamp(45px, 7vw, 90px);
+
+    font-size:
+        clamp(45px, 7vw, 90px);
 
     line-height: .95;
 
@@ -751,6 +1106,7 @@ section {
 }
 
 .contact p {
+
     color: #777;
 
     margin-bottom: 35px;
@@ -759,6 +1115,7 @@ section {
 }
 
 .email {
+
     display: block;
 
     margin-top: 25px;
@@ -768,9 +1125,12 @@ section {
     font-size: 13px;
 
     text-decoration: none;
+
+    transition: .3s;
 }
 
 .email:hover {
+
     color: white;
 }
 
@@ -780,11 +1140,13 @@ section {
 ========================================================= */
 
 footer {
+
     padding: 35px;
 
     text-align: center;
 
-    border-top: 1px solid #171717;
+    border-top:
+        1px solid #171717;
 
     color: #555;
 
@@ -795,11 +1157,37 @@ footer {
 
 
 /* =========================================================
-   MOBILE MENU
+   MOBILE HEADER
 ========================================================= */
 
 .mobile-header {
+
     display: none;
+}
+
+
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(40px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
 }
 
 
@@ -818,7 +1206,8 @@ footer {
     }
 
     .services-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
 }
@@ -830,7 +1219,9 @@ footer {
         padding-top: 70px;
     }
 
+
     .mobile-header {
+
         position: fixed;
 
         display: flex;
@@ -845,16 +1236,24 @@ footer {
 
         height: 65px;
 
-        background: #111;
+        background:
+            rgba(17,17,17,.9);
 
-        border-bottom: 1px solid #242424;
+        border-bottom:
+            1px solid #242424;
 
         padding: 0 20px;
 
         z-index: 200;
+
+        backdrop-filter: blur(15px);
+
+        -webkit-backdrop-filter: blur(15px);
     }
 
+
     .mobile-logo {
+
         font-weight: bold;
     }
 
@@ -862,8 +1261,11 @@ footer {
         color: #4da6ff;
     }
 
+
     .mobile-toggle {
-        border: 1px solid #333;
+
+        border:
+            1px solid #333;
 
         background: #171717;
 
@@ -879,100 +1281,161 @@ footer {
         font-size: 20px;
     }
 
+
     .sidebar {
+
         left: 10px;
         right: 10px;
 
         top: 75px;
+
         bottom: auto;
 
         width: auto;
 
-        max-height: calc(100vh - 90px);
+        max-height:
+            calc(100vh - 90px);
 
-        transform: translateY(-130%);
+        transform:
+            translateY(-130%);
 
         transition: .4s;
 
         overflow-y: auto;
     }
 
+
     .sidebar.open {
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
+
 
     main {
         margin-left: 0;
     }
 
-    .hero {
-        min-height: calc(100vh - 70px);
 
-        padding: 30px 20px;
+    .hero {
+
+        min-height:
+            calc(100vh - 70px);
+
+        padding:
+            30px 20px;
     }
+
 
     .hero h1 {
-        font-size: clamp(52px, 16vw, 95px);
 
-        letter-spacing: -4px;
+        font-size:
+            clamp(52px, 16vw, 95px);
+
+        letter-spacing:
+            -4px;
     }
+
 
     .hero h1 strong {
-        letter-spacing: -5px;
+
+        letter-spacing:
+            -5px;
     }
 
+
     .hero-description {
+
         font-size: 11px;
 
         letter-spacing: 1.5px;
 
-        margin: 30px auto;
+        margin:
+            30px auto;
     }
 
+
     section {
-        padding: 90px 25px;
+
+        padding:
+            90px 25px;
     }
+
 
     .work-grid,
     .services-grid,
     .about-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
 
+
     .about-grid {
+
         gap: 40px;
+    }
+
+
+    .glow {
+
+        width: 450px;
+        height: 450px;
     }
 
 }
 
 
 /* =========================================================
-   SCROLL ANIMATION
+   REDUCED MOTION
 ========================================================= */
 
-.reveal {
-    opacity: 0;
+@media(prefers-reduced-motion: reduce) {
 
-    transform: translateY(40px);
+    *,
+    *::before,
+    *::after {
 
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-}
+        animation-duration:
+            .01ms !important;
 
-.reveal.show {
-    opacity: 1;
+        animation-iteration-count:
+            1 !important;
 
-    transform: translateY(0);
+        scroll-behavior:
+            auto !important;
+    }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
+<!-- ======================================================
+     ANIMATED BACKGROUND
+====================================================== -->
+
+<div class="animated-background">
+
+    <div class="glow one"></div>
+
+    <div class="glow two"></div>
+
+    <div class="glow three"></div>
+
+</div>
+
 <div class="grid-background"></div>
+
+<div class="light-streaks"></div>
+
+<div class="particles"></div>
+
 
 
 <!-- ======================================================
@@ -987,11 +1450,15 @@ footer {
 
     <button
         class="mobile-toggle"
-        onclick="toggleMenu()">
+        onclick="toggleMenu()"
+        aria-label="Open menu">
+
         ☰
+
     </button>
 
 </header>
+
 
 
 <!-- ======================================================
@@ -999,6 +1466,7 @@ footer {
 ====================================================== -->
 
 <aside class="sidebar" id="sidebar">
+
 
     <div class="profile-top">
 
@@ -1031,28 +1499,55 @@ footer {
     </div>
 
 
+
     <!-- SOCIAL -->
 
     <div class="socials">
 
-        <a href="#" title="Facebook">
+        <!-- Replace # with your real Facebook URL -->
+        <a
+            href="#"
+            title="Facebook"
+            aria-label="Facebook">
+
             f
+
         </a>
 
-        <a href="#" title="LinkedIn">
+
+        <!-- Replace # with your LinkedIn URL -->
+        <a
+            href="#"
+            title="LinkedIn"
+            aria-label="LinkedIn">
+
             in
+
         </a>
 
-        <a href="#" title="GitHub">
+
+        <!-- Replace # with your GitHub URL -->
+        <a
+            href="#"
+            title="GitHub"
+            aria-label="GitHub">
+
             GH
+
         </a>
 
-        <a href="mailto:edwinpenacubajr@gmail.com"
-           title="Email">
+
+        <a
+            href="mailto:edwinpenacubajr@gmail.com"
+            title="Email"
+            aria-label="Email">
+
             @
+
         </a>
 
     </div>
+
 
 
     <!-- MENU -->
@@ -1068,7 +1563,9 @@ footer {
             class="active"
             onclick="closeMenu()">
 
-            <span class="menu-icon">⌂</span>
+            <span class="menu-icon">
+                ⌂
+            </span>
 
             Home
 
@@ -1079,11 +1576,15 @@ footer {
             href="#work"
             onclick="closeMenu()">
 
-            <span class="menu-icon">▣</span>
+            <span class="menu-icon">
+                ▣
+            </span>
 
             Work
 
-            <span class="badge">06</span>
+            <span class="badge">
+                06
+            </span>
 
         </a>
 
@@ -1092,7 +1593,9 @@ footer {
             href="#services"
             onclick="closeMenu()">
 
-            <span class="menu-icon">◇</span>
+            <span class="menu-icon">
+                ◇
+            </span>
 
             Services
 
@@ -1103,9 +1606,24 @@ footer {
             href="#about"
             onclick="closeMenu()">
 
-            <span class="menu-icon">○</span>
+            <span class="menu-icon">
+                ○
+            </span>
 
             About
+
+        </a>
+
+
+        <a
+            href="#contact"
+            onclick="closeMenu()">
+
+            <span class="menu-icon">
+                @
+            </span>
+
+            Contact
 
         </a>
 
@@ -1122,6 +1640,7 @@ footer {
 <main>
 
 
+
 <!-- ======================================================
      HERO
 ====================================================== -->
@@ -1132,14 +1651,18 @@ footer {
 
     <div class="hero-content">
 
+
         <div class="hero-small">
+
             VIRTUAL ASSISTANT • ADMINISTRATIVE SUPPORT
+
         </div>
 
 
         <h1>
 
             WORK
+
             <strong>
                 SMARTER.
             </strong>
@@ -1158,11 +1681,13 @@ footer {
 
         <a
             class="btn"
-            href="mailto:edwinpenacubajr@gmail.com?subject=Virtual%20Assistant%20Inquiry">
+            href="mailto:edwinpenacubajr@gmail.com?subject=Virtual%20Assistant%20Inquiry&body=Hi%20Edwin%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20Virtual%20Assistant%20services.%0A%0AThank%20you.">
 
             HIRE ME!
 
-            <span>↗</span>
+            <span>
+                ↗
+            </span>
 
         </a>
 
@@ -1178,6 +1703,7 @@ footer {
 
 <section id="work">
 
+
     <div class="reveal">
 
         <div class="section-label">
@@ -1185,8 +1711,10 @@ footer {
         </div>
 
         <h2 class="section-title">
+
             WHAT I<br>
             CAN HANDLE.
+
         </h2>
 
         <p class="section-description">
@@ -1198,6 +1726,7 @@ footer {
         </p>
 
     </div>
+
 
 
     <div class="work-grid">
@@ -1214,9 +1743,11 @@ footer {
             </h3>
 
             <p>
+
                 Accurate data input, updating records,
                 spreadsheet management and document
                 organization.
+
             </p>
 
         </div>
@@ -1234,9 +1765,11 @@ footer {
             </h3>
 
             <p>
+
                 Handling documents, reports, email
                 communication, scheduling and
                 day-to-day administrative tasks.
+
             </p>
 
         </div>
@@ -1254,9 +1787,11 @@ footer {
             </h3>
 
             <p>
+
                 Stock monitoring, inventory checking,
                 receiving documentation and
                 inventory accuracy.
+
             </p>
 
         </div>
@@ -1274,9 +1809,11 @@ footer {
             </h3>
 
             <p>
+
                 Online research, information gathering,
                 comparison and organized presentation
                 of useful findings.
+
             </p>
 
         </div>
@@ -1294,9 +1831,11 @@ footer {
             </h3>
 
             <p>
+
                 Excel spreadsheets, Word documents,
                 reports, presentations and organized
                 business files.
+
             </p>
 
         </div>
@@ -1314,9 +1853,11 @@ footer {
             </h3>
 
             <p>
+
                 Supporting logistics, warehouse
                 documentation, monitoring and
                 daily operational processes.
+
             </p>
 
         </div>
@@ -1334,6 +1875,7 @@ footer {
 
 <section id="services">
 
+
     <div class="reveal">
 
         <div class="section-label">
@@ -1341,11 +1883,14 @@ footer {
         </div>
 
         <h2 class="section-title">
+
             HOW I CAN<br>
             HELP.
+
         </h2>
 
     </div>
+
 
 
     <div class="services-grid">
@@ -1362,8 +1907,10 @@ footer {
             </h3>
 
             <p>
+
                 Keep your daily tasks organized
                 so you can focus on higher-value work.
+
             </p>
 
         </div>
@@ -1381,8 +1928,10 @@ footer {
             </h3>
 
             <p>
+
                 Clean, organize and maintain
                 business information and records.
+
             </p>
 
         </div>
@@ -1400,8 +1949,10 @@ footer {
             </h3>
 
             <p>
+
                 Find relevant information quickly
                 and present it in an organized format.
+
             </p>
 
         </div>
@@ -1419,8 +1970,10 @@ footer {
             </h3>
 
             <p>
+
                 Build and maintain Excel and
                 spreadsheet-based workflows.
+
             </p>
 
         </div>
@@ -1438,8 +1991,10 @@ footer {
             </h3>
 
             <p>
+
                 Assist with stock records,
                 checking and documentation.
+
             </p>
 
         </div>
@@ -1457,8 +2012,10 @@ footer {
             </h3>
 
             <p>
+
                 Flexible assistance based on
                 your business needs and workflow.
+
             </p>
 
         </div>
@@ -1476,6 +2033,7 @@ footer {
 
 <section id="about">
 
+
     <div class="reveal">
 
         <div class="section-label">
@@ -1483,11 +2041,14 @@ footer {
         </div>
 
         <h2 class="section-title">
+
             A RELIABLE<br>
             EXTRA HAND.
+
         </h2>
 
     </div>
+
 
 
     <div class="about-grid">
@@ -1496,64 +2057,114 @@ footer {
         <div class="about-text reveal">
 
             <p>
+
                 I'm Edwin, a Virtual Assistant focused
                 on administrative support, data entry,
                 research, inventory and operations.
+
             </p>
 
             <p>
+
                 My experience working with documents,
                 inventory records, reports and daily
                 operations has helped me develop a
                 strong eye for accuracy and organization.
+
             </p>
 
             <p>
+
                 I believe good virtual assistance is not
                 only about completing tasks. It's about
                 making workflows easier, keeping things
                 organized and helping clients save time.
+
             </p>
 
         </div>
 
 
+
         <div class="skills reveal">
 
+
             <div class="skill">
+
                 Data Entry
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
 
+
             <div class="skill">
+
                 Microsoft Excel
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
 
+
             <div class="skill">
+
                 Microsoft Word
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
 
+
             <div class="skill">
+
                 Google Workspace
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
 
+
             <div class="skill">
+
                 Research
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
 
+
             <div class="skill">
+
                 Inventory Management
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
 
+
             <div class="skill">
+
                 Administrative Support
-                <span>✓</span>
+
+                <span>
+                    ✓
+                </span>
+
             </div>
+
 
         </div>
 
@@ -1567,35 +2178,51 @@ footer {
      CONTACT
 ====================================================== -->
 
-<section class="contact" id="contact">
+<section
+    class="contact"
+    id="contact">
+
 
     <div class="contact-content reveal">
 
+
         <div class="section-label">
+
             LET'S WORK TOGETHER
+
         </div>
 
+
         <h2>
+
             NEED A<br>
             RELIABLE VA?
+
         </h2>
 
+
         <p>
+
             Let's talk about how I can help
             organize your workload and support
             your business.
+
         </p>
+
 
 
         <a
             class="btn"
-            href="mailto:edwinpenacubajr@gmail.com?subject=Virtual%20Assistant%20Inquiry">
+            href="mailto:edwinpenacubajr@gmail.com?subject=Virtual%20Assistant%20Inquiry&body=Hi%20Edwin%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20Virtual%20Assistant%20services.%0A%0AThank%20you.">
 
             EMAIL ME
 
-            <span>↗</span>
+            <span>
+                ↗
+            </span>
 
         </a>
+
 
 
         <a
@@ -1609,6 +2236,7 @@ footer {
     </div>
 
 </section>
+
 
 
 <!-- ======================================================
@@ -1633,6 +2261,7 @@ footer {
 
 <script>
 
+
 /* =========================================================
    LIVE TIME
 ========================================================= */
@@ -1641,25 +2270,36 @@ function updateTime() {
 
     const now = new Date();
 
-    let hours = now.getHours();
+    let hours =
+        now.getHours();
 
     const minutes =
-        String(now.getMinutes()).padStart(2, "0");
+        String(
+            now.getMinutes()
+        ).padStart(2, "0");
 
     const ampm =
-        hours >= 12 ? "PM" : "AM";
+        hours >= 12
+            ? "PM"
+            : "AM";
 
     hours =
         hours % 12 || 12;
 
-    document.getElementById("time").textContent =
+    document.getElementById(
+        "time"
+    ).textContent =
         `${hours}:${minutes} ${ampm}`;
 
 }
 
 updateTime();
 
-setInterval(updateTime, 30000);
+setInterval(
+    updateTime,
+    30000
+);
+
 
 
 /* =========================================================
@@ -1670,7 +2310,8 @@ function toggleMenu() {
 
     document
         .getElementById("sidebar")
-        .classList.toggle("open");
+        .classList
+        .toggle("open");
 
 }
 
@@ -1679,9 +2320,11 @@ function closeMenu() {
 
     document
         .getElementById("sidebar")
-        .classList.remove("open");
+        .classList
+        .remove("open");
 
 }
+
 
 
 /* =========================================================
@@ -1693,17 +2336,21 @@ const observer =
 
         entries => {
 
-            entries.forEach(entry => {
+            entries.forEach(
+                entry => {
 
-                if (entry.isIntersecting) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                    entry.target
-                        .classList
-                        .add("show");
+                        entry.target
+                            .classList
+                            .add("show");
+
+                    }
 
                 }
-
-            });
+            );
 
         },
 
@@ -1723,56 +2370,135 @@ document
     });
 
 
+
 /* =========================================================
    ACTIVE MENU
 ========================================================= */
 
 const sections =
-    document.querySelectorAll("section");
+    document.querySelectorAll(
+        "section"
+    );
 
 const menuLinks =
-    document.querySelectorAll(".menu a");
+    document.querySelectorAll(
+        ".menu a"
+    );
 
 
-window.addEventListener("scroll", () => {
+window.addEventListener(
+    "scroll",
+    () => {
 
-    let current = "";
+        let current = "";
 
-    sections.forEach(section => {
+        sections.forEach(
+            section => {
 
-        const sectionTop =
-            section.offsetTop - 200;
+                const sectionTop =
+                    section.offsetTop - 250;
+
+                if (
+                    window.scrollY >=
+                    sectionTop
+                ) {
+
+                    current =
+                        section.getAttribute(
+                            "id"
+                        );
+
+                }
+
+            }
+        );
+
+
+        menuLinks.forEach(
+            link => {
+
+                link.classList.remove(
+                    "active"
+                );
+
+                if (
+                    link.getAttribute(
+                        "href"
+                    ) === "#" + current
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    event => {
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        const button =
+            document.querySelector(
+                ".mobile-toggle"
+            );
 
         if (
-            window.scrollY >= sectionTop
+            window.innerWidth <= 750 &&
+            sidebar.classList.contains("open") &&
+            !sidebar.contains(event.target) &&
+            !button.contains(event.target)
         ) {
 
-            current =
-                section.getAttribute("id");
+            sidebar.classList.remove(
+                "open"
+            );
 
         }
 
-    });
+    }
+);
 
 
-    menuLinks.forEach(link => {
 
-        link.classList.remove("active");
+/* =========================================================
+   CLOSE MOBILE MENU ON RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
 
         if (
-            link.getAttribute("href") ===
-            "#" + current
+            window.innerWidth > 750
         ) {
 
-            link.classList.add("active");
+            closeMenu();
 
         }
 
-    });
-
-});
+    }
+);
 
 </script>
 
+
 </body>
 </html>
+
