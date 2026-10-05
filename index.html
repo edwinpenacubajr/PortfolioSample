@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="Edwin Penacuba Jr. — Virtual Assistant specializing in administrative support, data entry, inventory, research and operations.">
+
+<title>Edwin Penacuba | Virtual Assistant</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #f2f2f2;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+
+    background:
+        radial-gradient(
+            circle at 70% 40%,
+            rgba(30, 120, 200, 0.10),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 30% 80%,
+            rgba(0, 100, 180, 0.07),
+            transparent 35%
+        );
+}
+
+.grid-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .25;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+    background-size: 70px 70px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    bottom: 16px;
+
+    width: 272px;
+
+    background: rgba(22,22,22,.94);
+    border-radius: 25px;
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 100;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+
+    backdrop-filter: blur(15px);
+}
+
+
+/* =========================================================
+   SIDEBAR TOP
+========================================================= */
+
+.profile-top {
+    text-align: center;
+}
+
+.time {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ddd;
+
+    margin-bottom: 8px;
+}
+
+.location {
+    color: #777;
+    font-size: 11px;
+}
+
+.logo {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.logo span {
+    color: #4da6ff;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar {
+    width: 105px;
+    height: 105px;
+
+    margin: 25px auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #2c2c2c,
+            #111
+        );
+
+    border: 4px solid #171717;
+
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,.06),
+        0 15px 35px rgba(0,0,0,.5);
+}
+
+.avatar::after {
+    content: "✓";
+
+    position: absolute;
+
+    margin-left: 75px;
+    margin-top: 72px;
+
+    width: 23px;
+    height: 23px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #278be0;
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    border: 3px solid #161616;
+}
+
+.profile-name {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.profile-role {
+    margin-top: 5px;
+    color: #858585;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    margin: 16px 0 20px;
+}
+
+.socials a {
+    width: 42px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #aaa;
+
+    border: 1px solid #303030;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.socials a:hover {
+    color: white;
+    background: #1b1b1b;
+    border-color: #444;
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu-title {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+
+    margin: 0 0 10px 5px;
+}
+
+.menu {
+    border-top: 1px solid #303030;
+    padding-top: 12px;
+}
+
+.menu a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 12px 10px;
+
+    color: #aaa;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .25s;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #64b5ff;
+    background: rgba(60,150,230,.07);
+}
+
+.menu-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.badge {
+    margin-left: auto;
+
+    background: #123451;
+    color: #5eb6ff;
+
+    padding: 3px 7px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+main {
+    margin-left: 305px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+    padding: 60px;
+    overflow: hidden;
+}
+
+
+/* animated lines */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 110%;
+    height: 420px;
+
+    left: -5%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background:
+        repeating-linear-gradient(
+            175deg,
+            transparent 0px,
+            transparent 30px,
+            rgba(40,130,200,.15) 31px,
+            transparent 32px
+        );
+
+    opacity: .8;
+
+    animation: moveLines 8s linear infinite;
+}
+
+@keyframes moveLines {
+
+    0% {
+        transform:
+            translateY(-50%)
+            translateX(-40px);
+    }
+
+    50% {
+        transform:
+            translateY(-50%)
+            translateX(40px);
+    }
+
+    100% {
+        transform:
+            translateY(-50%)
+            translateX(-40px);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 1050px;
+}
+
+
+/* =========================================================
+   HERO TEXT
+========================================================= */
+
+.hero-small {
+    font-size: 13px;
+    letter-spacing: 5px;
+
+    color: #777;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(65px, 9vw, 145px);
+
+    line-height: .84;
+
+    font-weight: 200;
+
+    letter-spacing: -5px;
+}
+
+.hero h1 strong {
+    display: block;
+
+    font-weight: 900;
+
+    letter-spacing: -7px;
+}
+
+.hero-description {
+    max-width: 650px;
+
+    margin: 40px auto;
+
+    color: #9a9a9a;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+
+    min-width: 175px;
+
+    padding: 18px 25px;
+
+    color: white;
+
+    border: 1px solid #333;
+
+    background: rgba(10,10,10,.7);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    transition: .3s;
+}
+
+.btn:hover {
+    background: white;
+    color: black;
+
+    border-color: white;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+section {
+    min-height: 100vh;
+
+    padding: 110px 8%;
+
+    border-top: 1px solid #171717;
+}
+
+.section-label {
+    color: #4faeff;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: clamp(40px, 6vw, 75px);
+
+    line-height: .95;
+
+    margin-bottom: 25px;
+
+    font-weight: 800;
+}
+
+.section-description {
+    max-width: 650px;
+
+    color: #888;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   WORK
+========================================================= */
+
+.work-grid {
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap: 20px;
+}
+
+.work-card {
+    min-height: 260px;
+
+    padding: 30px;
+
+    background: #111;
+
+    border: 1px solid #242424;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: .4s;
+}
+
+.work-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    right: -80px;
+    top: -80px;
+
+    background: #167ac1;
+
+    opacity: .05;
+
+    border-radius: 50%;
+}
+
+.work-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #3a3a3a;
+}
+
+.work-number {
+    font-size: 12px;
+    color: #555;
+
+    margin-bottom: 40px;
+}
+
+.work-card h3 {
+    font-size: 25px;
+
+    margin-bottom: 12px;
+}
+
+.work-card p {
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services-grid {
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 15px;
+}
+
+.service {
+    padding: 30px;
+
+    background: #101010;
+
+    border: 1px solid #222;
+
+    min-height: 220px;
+
+    transition: .3s;
+}
+
+.service:hover {
+    border-color: #3b3b3b;
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    font-size: 28px;
+
+    margin-bottom: 30px;
+}
+
+.service h3 {
+    margin-bottom: 12px;
+
+    font-size: 18px;
+}
+
+.service p {
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid {
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr .9fr;
+
+    gap: 70px;
+}
+
+.about-text {
+    color: #999;
+
+    line-height: 1.9;
+
+    font-size: 15px;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+}
+
+.skills {
+    display: grid;
+
+    gap: 12px;
+}
+
+.skill {
+    padding: 17px;
+
+    border: 1px solid #242424;
+
+    background: #111;
+
+    color: #bbb;
+
+    font-size: 13px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill span {
+    color: #4da6ff;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.contact-content {
+    max-width: 800px;
+}
+
+.contact h2 {
+    font-size: clamp(45px, 7vw, 90px);
+
+    line-height: .95;
+
+    margin-bottom: 30px;
+}
+
+.contact p {
+    color: #777;
+
+    margin-bottom: 35px;
+
+    line-height: 1.7;
+}
+
+.email {
+    display: block;
+
+    margin-top: 25px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    text-decoration: none;
+}
+
+.email:hover {
+    color: white;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 35px;
+
+    text-align: center;
+
+    border-top: 1px solid #171717;
+
+    color: #555;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.mobile-header {
+    display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1000px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    main {
+        margin-left: 255px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width: 750px) {
+
+    body {
+        padding-top: 70px;
+    }
+
+    .mobile-header {
+        position: fixed;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 65px;
+
+        background: #111;
+
+        border-bottom: 1px solid #242424;
+
+        padding: 0 20px;
+
+        z-index: 200;
+    }
+
+    .mobile-logo {
+        font-weight: bold;
+    }
+
+    .mobile-logo span {
+        color: #4da6ff;
+    }
+
+    .mobile-toggle {
+        border: 1px solid #333;
+
+        background: #171717;
+
+        color: white;
+
+        width: 40px;
+        height: 40px;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        font-size: 20px;
+    }
+
+    .sidebar {
+        left: 10px;
+        right: 10px;
+
+        top: 75px;
+        bottom: auto;
+
+        width: auto;
+
+        max-height: calc(100vh - 90px);
+
+        transform: translateY(-130%);
+
+        transition: .4s;
+
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        transform: translateY(0);
+    }
+
+    main {
+        margin-left: 0;
+    }
+
+    .hero {
+        min-height: calc(100vh - 70px);
+
+        padding: 30px 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(52px, 16vw, 95px);
+
+        letter-spacing: -4px;
+    }
+
+    .hero h1 strong {
+        letter-spacing: -5px;
+    }
+
+    .hero-description {
+        font-size: 11px;
+
+        letter-spacing: 1.5px;
+
+        margin: 30px auto;
+    }
+
+    section {
+        padding: 90px 25px;
+    }
+
+    .work-grid,
+    .services-grid,
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        gap: 40px;
+    }
+
+}
+
+
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(40px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="grid-background"></div>
+
+
+<!-- ======================================================
+     MOBILE HEADER
+====================================================== -->
+
+<header class="mobile-header">
+
+    <div class="mobile-logo">
+        EDWIN<span>.</span>
+    </div>
+
+    <button
+        class="mobile-toggle"
+        onclick="toggleMenu()">
+        ☰
+    </button>
+
+</header>
+
+
+<!-- ======================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="profile-top">
+
+        <div class="time" id="time">
+            3:21 PM
+        </div>
+
+        <div class="location">
+            in the Philippines
+        </div>
+
+        <div class="logo">
+            Edwin<span>Ops</span>
+        </div>
+
+    </div>
+
+
+    <div class="avatar">
+        EP
+    </div>
+
+
+    <div class="profile-name">
+        Edwin Penacuba
+    </div>
+
+    <div class="profile-role">
+        Virtual Assistant
+    </div>
+
+
+    <!-- SOCIAL -->
+
+    <div class="socials">
+
+        <a href="#" title="Facebook">
+            f
+        </a>
+
+        <a href="#" title="LinkedIn">
+            in
+        </a>
+
+        <a href="#" title="GitHub">
+            GH
+        </a>
+
+        <a href="mailto:edwinpenacubajr@gmail.com"
+           title="Email">
+            @
+        </a>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu-title">
+        MENU
+    </div>
+
+    <nav class="menu">
+
+        <a
+            href="#home"
+            class="active"
+            onclick="closeMenu()">
+
+            <span class="menu-icon">⌂</span>
+
+            Home
+
+        </a>
+
+
+        <a
+            href="#work"
+            onclick="closeMenu()">
+
+            <span class="menu-icon">▣</span>
+
+            Work
+
+            <span class="badge">06</span>
+
+        </a>
+
+
+        <a
+            href="#services"
+            onclick="closeMenu()">
+
+            <span class="menu-icon">◇</span>
+
+            Services
+
+        </a>
+
+
+        <a
+            href="#about"
+            onclick="closeMenu()">
+
+            <span class="menu-icon">○</span>
+
+            About
+
+        </a>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
+<main>
+
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section
+    id="home"
+    class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            VIRTUAL ASSISTANT • ADMINISTRATIVE SUPPORT
+        </div>
+
+
+        <h1>
+
+            WORK
+            <strong>
+                SMARTER.
+            </strong>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            I HELP BUSINESSES STAY ORGANIZED,
+            PRODUCTIVE AND ON TRACK THROUGH
+            RELIABLE VIRTUAL ASSISTANCE.
+
+        </p>
+
+
+        <a
+            class="btn"
+            href="mailto:edwinpenacubajr@gmail.com?subject=Virtual%20Assistant%20Inquiry">
+
+            HIRE ME!
+
+            <span>↗</span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     WORK
+====================================================== -->
+
+<section id="work">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            01 / WORK
+        </div>
+
+        <h2 class="section-title">
+            WHAT I<br>
+            CAN HANDLE.
+        </h2>
+
+        <p class="section-description">
+
+            From administrative tasks to inventory
+            and data management, I help keep
+            daily operations organized and accurate.
+
+        </p>
+
+    </div>
+
+
+    <div class="work-grid">
+
+
+        <div class="work-card reveal">
+
+            <div class="work-number">
+                01
+            </div>
+
+            <h3>
+                Data Entry
+            </h3>
+
+            <p>
+                Accurate data input, updating records,
+                spreadsheet management and document
+                organization.
+            </p>
+
+        </div>
+
+
+
+        <div class="work-card reveal">
+
+            <div class="work-number">
+                02
+            </div>
+
+            <h3>
+                Administrative Support
+            </h3>
+
+            <p>
+                Handling documents, reports, email
+                communication, scheduling and
+                day-to-day administrative tasks.
+            </p>
+
+        </div>
+
+
+
+        <div class="work-card reveal">
+
+            <div class="work-number">
+                03
+            </div>
+
+            <h3>
+                Inventory Management
+            </h3>
+
+            <p>
+                Stock monitoring, inventory checking,
+                receiving documentation and
+                inventory accuracy.
+            </p>
+
+        </div>
+
+
+
+        <div class="work-card reveal">
+
+            <div class="work-number">
+                04
+            </div>
+
+            <h3>
+                Research
+            </h3>
+
+            <p>
+                Online research, information gathering,
+                comparison and organized presentation
+                of useful findings.
+            </p>
+
+        </div>
+
+
+
+        <div class="work-card reveal">
+
+            <div class="work-number">
+                05
+            </div>
+
+            <h3>
+                Microsoft Office
+            </h3>
+
+            <p>
+                Excel spreadsheets, Word documents,
+                reports, presentations and organized
+                business files.
+            </p>
+
+        </div>
+
+
+
+        <div class="work-card reveal">
+
+            <div class="work-number">
+                06
+            </div>
+
+            <h3>
+                Operations Support
+            </h3>
+
+            <p>
+                Supporting logistics, warehouse
+                documentation, monitoring and
+                daily operational processes.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     SERVICES
+====================================================== -->
+
+<section id="services">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            02 / SERVICES
+        </div>
+
+        <h2 class="section-title">
+            HOW I CAN<br>
+            HELP.
+        </h2>
+
+    </div>
+
+
+    <div class="services-grid">
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◈
+            </div>
+
+            <h3>
+                Administrative Support
+            </h3>
+
+            <p>
+                Keep your daily tasks organized
+                so you can focus on higher-value work.
+            </p>
+
+        </div>
+
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ▤
+            </div>
+
+            <h3>
+                Data Management
+            </h3>
+
+            <p>
+                Clean, organize and maintain
+                business information and records.
+            </p>
+
+        </div>
+
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◎
+            </div>
+
+            <h3>
+                Web Research
+            </h3>
+
+            <p>
+                Find relevant information quickly
+                and present it in an organized format.
+            </p>
+
+        </div>
+
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◫
+            </div>
+
+            <h3>
+                Spreadsheet Support
+            </h3>
+
+            <p>
+                Build and maintain Excel and
+                spreadsheet-based workflows.
+            </p>
+
+        </div>
+
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ◇
+            </div>
+
+            <h3>
+                Inventory Support
+            </h3>
+
+            <p>
+                Assist with stock records,
+                checking and documentation.
+            </p>
+
+        </div>
+
+
+
+        <div class="service reveal">
+
+            <div class="service-icon">
+                ↗
+            </div>
+
+            <h3>
+                General VA Support
+            </h3>
+
+            <p>
+                Flexible assistance based on
+                your business needs and workflow.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     ABOUT
+====================================================== -->
+
+<section id="about">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            03 / ABOUT
+        </div>
+
+        <h2 class="section-title">
+            A RELIABLE<br>
+            EXTRA HAND.
+        </h2>
+
+    </div>
+
+
+    <div class="about-grid">
+
+
+        <div class="about-text reveal">
+
+            <p>
+                I'm Edwin, a Virtual Assistant focused
+                on administrative support, data entry,
+                research, inventory and operations.
+            </p>
+
+            <p>
+                My experience working with documents,
+                inventory records, reports and daily
+                operations has helped me develop a
+                strong eye for accuracy and organization.
+            </p>
+
+            <p>
+                I believe good virtual assistance is not
+                only about completing tasks. It's about
+                making workflows easier, keeping things
+                organized and helping clients save time.
+            </p>
+
+        </div>
+
+
+        <div class="skills reveal">
+
+            <div class="skill">
+                Data Entry
+                <span>✓</span>
+            </div>
+
+            <div class="skill">
+                Microsoft Excel
+                <span>✓</span>
+            </div>
+
+            <div class="skill">
+                Microsoft Word
+                <span>✓</span>
+            </div>
+
+            <div class="skill">
+                Google Workspace
+                <span>✓</span>
+            </div>
+
+            <div class="skill">
+                Research
+                <span>✓</span>
+            </div>
+
+            <div class="skill">
+                Inventory Management
+                <span>✓</span>
+            </div>
+
+            <div class="skill">
+                Administrative Support
+                <span>✓</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+     CONTACT
+====================================================== -->
+
+<section class="contact" id="contact">
+
+    <div class="contact-content reveal">
+
+        <div class="section-label">
+            LET'S WORK TOGETHER
+        </div>
+
+        <h2>
+            NEED A<br>
+            RELIABLE VA?
+        </h2>
+
+        <p>
+            Let's talk about how I can help
+            organize your workload and support
+            your business.
+        </p>
+
+
+        <a
+            class="btn"
+            href="mailto:edwinpenacubajr@gmail.com?subject=Virtual%20Assistant%20Inquiry">
+
+            EMAIL ME
+
+            <span>↗</span>
+
+        </a>
+
+
+        <a
+            class="email"
+            href="mailto:edwinpenacubajr@gmail.com">
+
+            edwinpenacubajr@gmail.com
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    © 2026 Edwin Penacuba.
+    Virtual Assistant Portfolio.
+
+</footer>
+
+
+</main>
+
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+/* =========================================================
+   LIVE TIME
+========================================================= */
+
+function updateTime() {
+
+    const now = new Date();
+
+    let hours = now.getHours();
+
+    const minutes =
+        String(now.getMinutes()).padStart(2, "0");
+
+    const ampm =
+        hours >= 12 ? "PM" : "AM";
+
+    hours =
+        hours % 12 || 12;
+
+    document.getElementById("time").textContent =
+        `${hours}:${minutes} ${ampm}`;
+
+}
+
+updateTime();
+
+setInterval(updateTime, 30000);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleMenu() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+function closeMenu() {
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target
+                        .classList
+                        .add("show");
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+
+/* =========================================================
+   ACTIVE MENU
+========================================================= */
+
+const sections =
+    document.querySelectorAll("section");
+
+const menuLinks =
+    document.querySelectorAll(".menu a");
+
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop =
+            section.offsetTop - 200;
+
+        if (
+            window.scrollY >= sectionTop
+        ) {
+
+            current =
+                section.getAttribute("id");
+
+        }
+
+    });
+
+
+    menuLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (
+            link.getAttribute("href") ===
+            "#" + current
+        ) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
